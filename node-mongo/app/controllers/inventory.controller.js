@@ -30,7 +30,7 @@ exports.getInventory = (req, res) => {
     .then((inventory) => {
       res.status(200).json(inventory);
     })
-    .catch((error) => {
+    .catch((err) => {
       if (err.kind === "ObjectId") {
         return res.status(404).send({
           message: "Inventory not found with id " + req.params.id,
