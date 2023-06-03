@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
-import { withRouter } from "react-router";
+// import { withRouter } from "react-router";
 import { Button, Container, Form, FormGroup, Input, Label } from "reactstrap";
 import AppNavBar from "./Navbar";
 
@@ -19,10 +19,10 @@ class InventoryEdit extends Component {
   }
 
   async componentDidMount() {
-    if (this.props.match.params.id !== "new") {
+    if (this.props.match.params.id !== 'new') {
       const inventory = await (
         await fetch(
-          `http://localhost:8080/api/inventory/${this.props.match.params.id}`
+          `/api/inventory/${this.props.match.params.id}`
         )
       ).json();
       this.setState({ item: inventory });
@@ -38,14 +38,14 @@ class InventoryEdit extends Component {
     this.setState({ item });
   };
 
-  handleSumbit = async (event) => {
+  handleSubmit = async (event) => {
     event.preventDefault();
     const { item } = this.state;
 
-    await fetch("http://localhost:8080/api/inventories", {
-      method: item._id ? "PUT" : "POST",
+    await fetch("/api/inventory", {
+      method: (item._id) ? "PUT" : "POST",
       headers: {
-        Accept: "application/json",
+        'Accept': "application/json",
         "Content-Type": "applicaction/json",
       },
       body: JSON.stringify(item),
@@ -67,7 +67,7 @@ class InventoryEdit extends Component {
         <Container>
           {/* display the appropriate title */}
           {title}
-          <Form onSubmit={this.handleSumbit}>
+          <Form onSubmit={this.handleSubmit}>
             <FormGroup>
               <Label for="prodname" className="h5 mt-3">
                 Product Name
@@ -140,4 +140,4 @@ class InventoryEdit extends Component {
   }
 }
 
-export default withRouter(InventoryEdit);
+export default InventoryEdit;

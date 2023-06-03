@@ -15,16 +15,16 @@ class InventoryList extends Component {
   componentDidMount() {
     this.setState({ isLoading: true });
 
-    fetch("http://localhost:8080/api/inventories")
+    fetch("api/inventories")
       .then((response) => response.json())
       .then((data) => this.setState({ inventories: data, isLoading: false }));
   }
 
   removeInv = async (id) => {
-    await fetch(`http://localhost:8080/api/inventory/${id}`, {
+    await fetch(`/api/inventory/${id}`, {
       method: "DELETE",
       headers: {
-        Accept: "application/json",
+        "Accept": "application/json",
         "Content-Type": "application/json",
       },
     });
@@ -43,7 +43,7 @@ class InventoryList extends Component {
       return <p>Loading...</p>;
     }
 
-    const InventoryList = inventories.map((inventory) => {
+    const inventoryList = inventories.map((inventory) => {
       return (
         <tr key={inventory._id}>
           <td style={{ whiteSpace: "nowrap" }}>{inventory.prodname}</td>
@@ -97,7 +97,7 @@ class InventoryList extends Component {
                 <th width="15%">Actions</th>
               </tr>
             </thead>
-            <tbody>{InventoryList}</tbody>
+            <tbody>{inventoryList}</tbody>
           </Table>
         </Container>
       </div>

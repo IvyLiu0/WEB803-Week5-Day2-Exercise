@@ -17,7 +17,7 @@ class App extends Component {
         <Routes>
           <Route exact path="/" element={<Home />} />
           <Route exact path="/inventories" element={<InventoryList />} />
-          <Route exact path="/inventories/:id" element={<InventoryEdit />} />
+          <Route path="/inventories/:id" element={<InventoryEdit />} />
         </Routes>
         {/* <Switch>
           <Route path="/" exact={true} component={Home} />
